@@ -221,7 +221,12 @@ Are you using this project or any of our other projects? Consider [leaving a tes
 
 Check out these related projects.
 
-- [terraform-null-label](https://github.com/cloudposse/terraform-null-label) - Terraform module designed to generate consistent names and tags for resources. Use terraform-null-label to implement a strict naming convention.
+- [terraform-aws-sns-topic](https://github.com/cloudposse/terraform-aws-sns-topic) - Terraform Module to Provide an Amazon Simple Notification Service (SNS)
+- [terraform-null-label](https://github.com/cloudposse/terraform-null-label) - Terraform Module to define a consistent naming convention by (namespace, stage, name, [attributes])
+- [terraform-aws-codebuild](https://github.com/cloudposse/terraform-aws-codebuild) - Terraform Module to easily leverage AWS CodeBuild for Continuous Integration
+- [terraform-aws-codepipeline-codedeploy](https://github.com/cloudposse/terraform-aws-codepipeline-codedeploy) - Terraform module that generates an AWS Codepipeline, and deploys via CodeDeploy
+- [terraform-aws-codefresh-backing-services](https://github.com/cloudposse/terraform-aws-codefresh-backing-services) - Terraform module to provision AWS backing services necessary to run Codefresh Enterprise
+- [terraform-aws-code-deploy](https://github.com/cloudposse/terraform-aws-code-deploy) - %!s(<nil>)
 
 
 
@@ -230,10 +235,8 @@ Check out these related projects.
 
 For additional context, refer to some of these links.
 
-- [Terraform Standard Module Structure](https://www.terraform.io/docs/modules/index.html#standard-module-structure) - HashiCorp's standard module structure is a file and directory layout we recommend for reusable modules distributed in separate repositories.
-- [Terraform Module Requirements](https://www.terraform.io/docs/registry/modules/publish.html#requirements) - HashiCorp's guidance on all the requirements for publishing a module. Meeting the requirements for publishing a module is extremely easy.
-- [Terraform `random_integer` Resource](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/integer) - The resource random_integer generates random values from a given range, described by the min and max attributes of a given resource.
-- [Terraform Version Pinning](https://www.terraform.io/docs/configuration/terraform.html#specifying-a-required-terraform-version) - The required_version setting can be used to constrain which versions of the Terraform CLI can be used with your configuration
+- [terraform-provider-aws](https://registry.terraform.io/providers/hashicorp/aws/latest) - Terraform AWS provider
+- [terraform-provider-local](https://registry.terraform.io/providers/hashicorp/local/latest) - Terraform local provider – Used to manage local resources, such as creating files.
 
 
 ## Help
