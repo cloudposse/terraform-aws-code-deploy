@@ -1,14 +1,24 @@
 output "id" {
-  description = "ID of the created example"
-  value       = module.this.enabled ? module.this.id : null
+  description = "The application ID."
+  value       = try(local.id, null)
 }
 
-output "example" {
-  description = "Example output"
-  value       = module.this.enabled ? local.example : null
+output "name" {
+  description = "The application's name."
+  value       = try(local.name, null)
 }
 
-output "random" {
-  description = "Stable random number for this example"
-  value       = module.this.enabled ? join("", random_integer.example[*].result) : null
+output "group_id" {
+  description = "The application group ID."
+  value       = try(local.group_id, null)
+}
+
+output "deployment_config_name" {
+  description = "The deployment group's config name."
+  value       = try(local.deployment_config_name, null)
+}
+
+output "deployment_config_id" {
+  description = "The deployment config ID."
+  value       = try(local.deployment_config_id, null)
 }
