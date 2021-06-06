@@ -258,7 +258,7 @@ resource "aws_codedeploy_deployment_group" "default" {
   }
 
   dynamic "trigger_configuration" {
-    for_each = length(try(local.sns_topic_arn,"")) <= 0 ? [] : [0]
+    for_each = length(try(local.sns_topic_arn, "")) <= 0 ? [] : [0]
 
     content {
       trigger_events     = var.trigger_events
