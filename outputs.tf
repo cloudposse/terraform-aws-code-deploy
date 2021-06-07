@@ -13,6 +13,11 @@ output "group_id" {
   value       = try(local.group_id, null)
 }
 
+output "group_name" {
+  description = "The application group ID."
+  value       = try(local.group_name, null)
+}
+
 output "deployment_config_name" {
   description = "The deployment group's config name."
   value       = try(local.deployment_config_name, null)

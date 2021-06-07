@@ -3,6 +3,7 @@ locals {
   id                                  = module.this.enabled ? join("", aws_codedeploy_app.default.*.id) : null
   name                                = module.this.enabled ? join("", aws_codedeploy_app.default.*.name) : null
   group_id                            = module.this.enabled ? join("", aws_codedeploy_deployment_group.default.*.id) : null
+  group_name                          = module.this.enabled ? join("", aws_codedeploy_deployment_group.default.*.deployment_group_name) : null
   deployment_config_name              = module.this.enabled ? join("", aws_codedeploy_deployment_config.default.*.id) : null
   deployment_config_id                = module.this.enabled ? join("", aws_codedeploy_deployment_config.default.*.deployment_config_id) : null
   auto_rollback_configuration_enabled = module.this.enabled && var.auto_rollback_configuration_events != null && length(var.auto_rollback_configuration_events) > 0
