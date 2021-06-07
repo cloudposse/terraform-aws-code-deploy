@@ -62,11 +62,11 @@ resource "aws_codedeploy_app" "default" {
 
 resource "random_id" "deployment_config_suffix" {
   keepers = {
-    traffic_routing_config = jsonencode(var.traffic_routing_config)
-    minimum_healthy_hosts = jsonencode(var.minimum_healthy_hosts)
-    count = jsonencode(local.count)
+    traffic_routing_config       = jsonencode(var.traffic_routing_config)
+    minimum_healthy_hosts        = jsonencode(var.minimum_healthy_hosts)
+    count                        = jsonencode(local.count)
     deployment_config_name_orgin = jsonencode(module.this.id)
-    compute_platform = jsonencode(var.compute_platform)
+    compute_platform             = jsonencode(var.compute_platform)
   }
 
   byte_length = 2
