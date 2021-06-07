@@ -57,7 +57,7 @@ variable "create_default_sns_topic" {
 
 variable "sns_topic_arn" {
   type        = string
-  default     = null
+  default     = ""
   description = "The ARN of the SNS topic through which notifications are sent."
 }
 

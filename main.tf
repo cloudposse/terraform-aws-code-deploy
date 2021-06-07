@@ -3,6 +3,7 @@ locals {
   id                                  = module.this.enabled ? join("", aws_codedeploy_app.default.*.id) : null
   name                                = module.this.enabled ? join("", aws_codedeploy_app.default.*.name) : null
   group_id                            = module.this.enabled ? join("", aws_codedeploy_deployment_group.default.*.id) : null
+  group_name                          = module.this.enabled ? join("", aws_codedeploy_deployment_group.default.*.deployment_group_name) : null
   deployment_config_name              = module.this.enabled ? join("", aws_codedeploy_deployment_config.default.*.id) : null
   deployment_config_id                = module.this.enabled ? join("", aws_codedeploy_deployment_config.default.*.deployment_config_id) : null
   auto_rollback_configuration_enabled = module.this.enabled && var.auto_rollback_configuration_events != null && length(var.auto_rollback_configuration_events) > 0
@@ -60,9 +61,21 @@ resource "aws_codedeploy_app" "default" {
   compute_platform = var.compute_platform
 }
 
+resource "random_id" "deployment_config_suffix" {
+  keepers = {
+    traffic_routing_config       = jsonencode(var.traffic_routing_config)
+    minimum_healthy_hosts        = jsonencode(var.minimum_healthy_hosts)
+    count                        = jsonencode(local.count)
+    deployment_config_name_orgin = jsonencode(module.this.id)
+    compute_platform             = jsonencode(var.compute_platform)
+  }
+
+  byte_length = 2
+}
+
 resource "aws_codedeploy_deployment_config" "default" {
   count                  = local.count
-  deployment_config_name = module.this.id
+  deployment_config_name = "${module.this.id}${module.this.delimiter}${random_id.deployment_config_suffix.hex}"
   compute_platform       = var.compute_platform
 
   dynamic "minimum_healthy_hosts" {
@@ -97,6 +110,10 @@ resource "aws_codedeploy_deployment_config" "default" {
         }
       }
     }
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
@@ -258,7 +275,7 @@ resource "aws_codedeploy_deployment_group" "default" {
   }
 
   dynamic "trigger_configuration" {
-    for_each = local.sns_topic_arn == null ? [0] : [1]
+    for_each = length(try(local.sns_topic_arn, "")) <= 0 ? [] : [0]
 
     content {
       trigger_events     = var.trigger_events
