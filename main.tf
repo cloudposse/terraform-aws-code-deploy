@@ -1,15 +1,17 @@
 locals {
-  count                               = module.this.enabled ? 1 : 0
-  id                                  = module.this.enabled ? join("", aws_codedeploy_app.default.*.id) : null
-  name                                = module.this.enabled ? join("", aws_codedeploy_app.default.*.name) : null
-  group_id                            = module.this.enabled ? join("", aws_codedeploy_deployment_group.default.*.id) : null
-  deployment_config_name              = module.this.enabled ? join("", aws_codedeploy_deployment_config.default.*.id) : null
-  deployment_config_id                = module.this.enabled ? join("", aws_codedeploy_deployment_config.default.*.deployment_config_id) : null
-  auto_rollback_configuration_enabled = module.this.enabled && var.auto_rollback_configuration_events != null && length(var.auto_rollback_configuration_events) > 0
-  alarm_configuration_enabled         = module.this.enabled && var.alarm_configuration != null
-  default_sns_topic_enabled           = module.this.enabled && var.create_default_sns_topic ? true : false
+  enabled = module.this.enabled
+
+  count                               = local.enabled ? 1 : 0
+  id                                  = local.enabled ? join("", aws_codedeploy_app.default.*.id) : null
+  name                                = local.enabled ? join("", aws_codedeploy_app.default.*.name) : null
+  group_id                            = local.enabled ? join("", aws_codedeploy_deployment_group.default.*.id) : null
+  deployment_config_name              = local.enabled ? join("", aws_codedeploy_deployment_config.default.*.id) : null
+  deployment_config_id                = local.enabled ? join("", aws_codedeploy_deployment_config.default.*.deployment_config_id) : null
+  auto_rollback_configuration_enabled = local.enabled && var.auto_rollback_configuration_events != null && length(var.auto_rollback_configuration_events) > 0
+  alarm_configuration_enabled         = local.enabled && var.alarm_configuration != null
+  default_sns_topic_enabled           = local.enabled && var.create_default_sns_topic
   sns_topic_arn                       = local.default_sns_topic_enabled ? module.sns_topic.sns_topic.arn : var.sns_topic_arn
-  default_service_role_enabled        = module.this.enabled && var.create_default_service_role ? true : false
+  default_service_role_enabled        = local.enabled && var.create_default_service_role
   default_service_role_count          = local.default_service_role_enabled ? 1 : 0
   service_role_arn                    = local.default_service_role_enabled ? join("", aws_iam_role.default.*.arn) : var.service_role_arn
   default_policy_name = {
@@ -58,6 +60,8 @@ resource "aws_codedeploy_app" "default" {
   count            = local.count
   name             = module.this.id
   compute_platform = var.compute_platform
+
+  tags = module.this.tags
 }
 
 resource "aws_codedeploy_deployment_config" "default" {
@@ -266,4 +270,6 @@ resource "aws_codedeploy_deployment_group" "default" {
       trigger_target_arn = local.sns_topic_arn
     }
   }
+
+  tags = module.this.tags
 }
