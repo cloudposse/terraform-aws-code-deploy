@@ -76,9 +76,19 @@ resource "random_id" "deployment_config_suffix" {
   byte_length = 2
 }
 
+module "aws_codedeploy_deployment_config_label" {
+  source  = "cloudposse/label/null"
+  version = "0.24.1"
+
+  attributes = [random_id.deployment_config_suffix.hex]
+
+  context = module.this.context
+}
+
+
 resource "aws_codedeploy_deployment_config" "default" {
   count                  = local.count
-  deployment_config_name = "${module.this.id}${module.this.delimiter}${random_id.deployment_config_suffix.hex}"
+  deployment_config_name = module.aws_codedeploy_deployment_config_label.id
   compute_platform       = var.compute_platform
 
   dynamic "minimum_healthy_hosts" {
@@ -278,7 +288,7 @@ resource "aws_codedeploy_deployment_group" "default" {
   }
 
   dynamic "trigger_configuration" {
-    for_each = length(try(local.sns_topic_arn, "")) <= 0 ? [] : [0]
+    for_each = length(try(local.sns_topic_arn, "")) <= 0 ? [] : [1]
 
     content {
       trigger_events     = var.trigger_events
