@@ -18,6 +18,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_aws_codedeploy_deployment_config_label"></a> [aws\_codedeploy\_deployment\_config\_label](#module\_aws\_codedeploy\_deployment\_config\_label) | cloudposse/label/null | 0.24.1 |
 | <a name="module_sns_topic"></a> [sns\_topic](#module\_sns\_topic) | cloudposse/sns-topic/aws | 0.16.0 |
 | <a name="module_this"></a> [this](#module\_this) | cloudposse/label/null | 0.24.1 |
 
