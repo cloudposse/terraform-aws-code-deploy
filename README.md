@@ -206,6 +206,7 @@ Available targets:
 | <a name="output_deployment_config_id"></a> [deployment\_config\_id](#output\_deployment\_config\_id) | The deployment config ID. |
 | <a name="output_deployment_config_name"></a> [deployment\_config\_name](#output\_deployment\_config\_name) | The deployment group's config name. |
 | <a name="output_group_id"></a> [group\_id](#output\_group\_id) | The application group ID. |
+| <a name="output_group_name"></a> [group\_name](#output\_group\_name) | The application group ID. |
 | <a name="output_id"></a> [id](#output\_id) | The application ID. |
 | <a name="output_name"></a> [name](#output\_name) | The application's name. |
 <!-- markdownlint-restore -->
