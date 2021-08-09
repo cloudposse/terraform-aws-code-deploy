@@ -79,9 +79,10 @@ usage: |-
   (which tests and deploys the example on AWS), see [test](test).
 
   ```hcl
-  module "example" {
-    source = "https://github.com/cloudposse/terraform-aws-code-deploy.git?ref=master"
-    example = "Hello world!"
+  module "example" {  
+    source = "cloudposse/code-deploy/aws"
+    # Cloud Posse recommends pinning every module to a specific version
+    # version = "x.x.x"
   }
   ```
 
@@ -103,3 +104,5 @@ include:
 contributors:
 - name: Vladimir Syromyatnikov
   github: SweetOps
+- name: RB
+  github: nitrocode
