@@ -152,6 +152,10 @@ module "ecs_alb_service_task" {
   ]
 }
 
+data "aws_lb_target_group" "blue" {
+  arn = module.alb.default_target_group_arn
+}
+
 module "code_deploy_blue_green" {
   source  = "../.."
   context = module.this.context
@@ -193,10 +197,10 @@ module "code_deploy_blue_green" {
         listener_arns = [module.alb.http_listener_arn]
       }
       blue_target_group = {
-        name = module.alb.default_target_group_arn
+        name = data.aws_lb_target_group.blue.name
       }
       green_target_group = {
-        name = aws_lb_target_group.green.arn
+        name = aws_lb_target_group.green.name
       }
     }
   }
