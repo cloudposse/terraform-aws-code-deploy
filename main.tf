@@ -44,7 +44,7 @@ resource "aws_iam_role" "default" {
 
 resource "aws_iam_role_policy_attachment" "default" {
   count      = local.default_service_role_count
-  policy_arn = format("arn:aws:iam::aws:policy/%s", lookup(local.default_policy_name, var.compute_platform))
+  policy_arn = format("arn:aws:iam::aws:policy/service-role/%s", lookup(local.default_policy_name, var.compute_platform))
   role       = join("", aws_iam_role.default.*.name)
 }
 
