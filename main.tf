@@ -172,7 +172,7 @@ resource "aws_codedeploy_deployment_group" "default" {
   }
 
   dynamic "ec2_tag_set" {
-    for_each = var.ec2_tag_filter == null ? [] : [var.ec2_tag_filter]
+    for_each = var.ec2_tag_filter == null ? [] : var.ec2_tag_filter
 
     content {
       ec2_tag_filter {
