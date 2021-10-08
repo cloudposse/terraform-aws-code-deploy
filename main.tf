@@ -79,7 +79,7 @@ resource "random_id" "deployment_config_suffix" {
 
 module "aws_codedeploy_deployment_config_label" {
   source  = "cloudposse/label/null"
-  version = "0.24.1"
+  version = "0.25.0"
 
   attributes = [random_id.deployment_config_suffix.hex]
 
