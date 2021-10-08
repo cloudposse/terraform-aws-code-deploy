@@ -190,7 +190,6 @@ resource "aws_codedeploy_deployment_group" "default" {
   # See https://docs.aws.amazon.com/cli/latest/reference/deploy/create-deployment-group.html for details
   dynamic "ec2_tag_set" {
     for_each = var.ec2_tag_filter == null ? [] : var.ec2_tag_filter
-
     content {
       dynamic "ec2_tag_filter" {
         for_each = ec2_tag_set.value.ec2_tag_filter
