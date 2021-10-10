@@ -181,8 +181,8 @@ resource "aws_codedeploy_deployment_group" "default" {
     for_each = var.ec2_tag_filter
 
     content {
-      key = ec2_tag_filter.value["key"]
-      type = ec2_tag_filter.value["type"]
+      key   = ec2_tag_filter.value["key"]
+      type  = ec2_tag_filter.value["type"]
       value = ec2_tag_filter.value["value"]
     }
   }
