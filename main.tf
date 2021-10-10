@@ -174,8 +174,8 @@ resource "aws_codedeploy_deployment_group" "default" {
   dynamic "ec2_tag_filter" {
     for_each = var.ec2_tag_filter
     content {
-      key = ec2_tag_filter.value["key"]
-      type = ec2_tag_filter.value["type"]
+      key   = ec2_tag_filter.value["key"]
+      type  = ec2_tag_filter.value["type"]
       value = ec2_tag_filter.value["value"]
     }
   }
@@ -184,15 +184,15 @@ resource "aws_codedeploy_deployment_group" "default" {
     for_each = var.ec2_tag_set == null ? [] : var.ec2_tag_set
 
     content {
-      dynamic  ec2_tag_filter {
+      dynamic "ec2_tag_filter" {
         for_each = ec2_tag_set.value.ec2_tag_filter
-          content {
-            #key   = lookup(ec2_tag_set.value, "key", null)
-            #type  = lookup(ec2_tag_set.value, "type", null)
-            #value = lookup(ec2_tag_set.value, "value", null)
-            key = ec2_tag_filter.value["key"]
-            type = ec2_tag_filter.value["type"]
-            value = ec2_tag_filter.value["value"]
+        content {
+          #key   = lookup(ec2_tag_set.value, "key", null)
+          #type  = lookup(ec2_tag_set.value, "type", null)
+          #value = lookup(ec2_tag_set.value, "value", null)
+          key   = ec2_tag_filter.value["key"]
+          type  = ec2_tag_filter.value["type"]
+          value = ec2_tag_filter.value["value"]
         }
       }
     }
