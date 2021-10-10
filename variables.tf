@@ -118,12 +118,12 @@ variable "deployment_style" {
 }
 
 variable "ec2_tag_filter" {
-  type = list(object({
+  type = set(object({
     key   = string
     type  = string
     value = string
   }))
-  default     = null
+  default     = []
   description = <<-DOC
     A list of sets of tag filters. If multiple tag groups are specified, 
     any instance that matches to at least one tag filter of every tag group is selected.
@@ -135,6 +135,22 @@ variable "ec2_tag_filter" {
     value:
       The value of the tag filter.
   DOC
+}
+
+variable "ec2_tag_set" {
+  description = "nested block: NestingSet, min items: 0, max items: 0"
+  type = set(object(
+    {
+      ec2_tag_filter = set(object(
+        {
+          key   = string
+          type  = string
+          value = string
+        }
+      ))
+    }
+  ))
+  default = []
 }
 
 variable "ecs_service" {
