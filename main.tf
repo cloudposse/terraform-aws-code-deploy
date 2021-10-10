@@ -196,6 +196,7 @@ resource "aws_codedeploy_deployment_group" "default" {
         }
       }
     }
+  }
 
   dynamic "ecs_service" {
     for_each = var.ecs_service == null ? [] : var.ecs_service
