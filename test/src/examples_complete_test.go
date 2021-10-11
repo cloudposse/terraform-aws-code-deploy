@@ -44,8 +44,8 @@ func TestExamplesComplete(t *testing.T) {
 	deploymentConfigID := terraform.Output(t, terraformOptions, "deployment_config_id")
 
 	assert.Equal(t, "cdp-test-ecs-alb-"+randID, name)
-	assert.Equal(t, "cdp-test-ecs-alb-"+randID, deploymentConfigName)
-	assert.Contains(t, id, "cdp-test-ecs-alb-"+randID, "ID should contains substring 'cdp-test-ecs-alb-'")
+	assert.Contains(t, deploymentConfigName, "cdp-test-ecs-alb-"+randID, "deployment_config_name should contains substring 'cdp-test-ecs-alb-"+randID+"'")
+	assert.Contains(t, id, "cdp-test-ecs-alb-"+randID, "ID should contains substring 'cdp-test-ecs-alb-'"+randID+"'")
 	assert.NotEmpty(t, groupID)
 	assert.NotEmpty(t, deploymentConfigID)
 }
