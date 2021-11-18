@@ -125,20 +125,12 @@ variable "ec2_tag_filter" {
   }))
   default     = []
   description = <<-DOC
-    A list of sets of tag filters. If multiple tag groups are specified, 
-    any instance that matches to at least one tag filter of every tag group is selected.
-
-    key:
-      The key of the tag filter.
-    type:
-      The type of the tag filter, either `KEY_ONLY`, `VALUE_ONLY`, or `KEY_AND_VALUE`.
-    value:
-      The value of the tag filter.
+    The Amazon EC2 tags on which to filter. The deployment group includes EC2 instances with any of the specified tags.
+    Cannot be used in the same call as ec2TagSet.
   DOC
 }
 
 variable "ec2_tag_set" {
-  description = "nested block: NestingSet, min items: 0, max items: 0"
   type = set(object(
     {
       ec2_tag_filter = set(object(
@@ -151,6 +143,17 @@ variable "ec2_tag_set" {
     }
   ))
   default = []
+  description = <<-DOC
+    A list of sets of tag filters. If multiple tag groups are specified,
+    any instance that matches to at least one tag filter of every tag group is selected.
+
+    key:
+      The key of the tag filter.
+    type:
+      The type of the tag filter, either `KEY_ONLY`, `VALUE_ONLY`, or `KEY_AND_VALUE`.
+    value:
+      The value of the tag filter.
+  DOC
 }
 
 variable "ecs_service" {
