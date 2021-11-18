@@ -142,7 +142,7 @@ variable "ec2_tag_set" {
       ))
     }
   ))
-  default = []
+  default     = []
   description = <<-DOC
     A list of sets of tag filters. If multiple tag groups are specified,
     any instance that matches to at least one tag filter of every tag group is selected.
