@@ -174,7 +174,7 @@ resource "aws_codedeploy_deployment_group" "default" {
   # Note that you cannot have both ec_tag_filter and ec2_tag_set vars set!
   # See https://docs.aws.amazon.com/cli/latest/reference/deploy/create-deployment-group.html for details
   dynamic "ec2_tag_filter" {
-    for_each = var.ec2_tag_filter == null ? [] : var.ec2_tag_filter
+    for_each = length(var.ec2_tag_filter) > 0 ? [] : var.ec2_tag_filter
     content {
       key   = ec2_tag_filter.value["key"]
       type  = ec2_tag_filter.value["type"]
