@@ -15,9 +15,9 @@ locals {
   default_service_role_count          = local.default_service_role_enabled ? 1 : 0
   service_role_arn                    = local.default_service_role_enabled ? join("", aws_iam_role.default.*.arn) : var.service_role_arn
   default_policy_arn = {
-    Server = "arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole"
-    Lambda = "arn:aws:iam::aws:policy/service-role/AWSCodeDeployRoleForLambda"
-    ECS    = "arn:aws:iam::aws:policy/AWSCodeDeployRoleForECS"
+    Server = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AWSCodeDeployRole"
+    Lambda = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AWSCodeDeployRoleForLambda"
+    ECS    = "arn:${data.aws_partition.current.partition}:iam::aws:policy/AWSCodeDeployRoleForECS"
   }
 }
 
@@ -34,6 +34,8 @@ data "aws_iam_policy_document" "assume_role" {
     }
   }
 }
+
+data "aws_partition" "current" {}
 
 resource "aws_iam_role" "default" {
   count              = local.default_service_role_count
