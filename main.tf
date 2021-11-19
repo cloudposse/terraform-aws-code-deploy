@@ -35,7 +35,9 @@ data "aws_iam_policy_document" "assume_role" {
   }
 }
 
-data "aws_partition" "current" {}
+data "aws_partition" "current" {
+  count = local.default_service_role_count
+}
 
 resource "aws_iam_role" "default" {
   count              = local.default_service_role_count
