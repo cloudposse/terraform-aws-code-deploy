@@ -14,10 +14,10 @@ locals {
   default_service_role_enabled        = local.enabled && var.create_default_service_role
   default_service_role_count          = local.default_service_role_enabled ? 1 : 0
   service_role_arn                    = local.default_service_role_enabled ? join("", aws_iam_role.default.*.arn) : var.service_role_arn
-  default_policy_name = {
-    Server = "AWSCodeDeployRole"
-    Lambda = "AWSCodeDeployRoleForLambda"
-    ECS    = "AWSCodeDeployRoleForECS"
+  default_policy_arn = {
+    Server = "arn:${join("", data.aws_partition.current.*.partition)}:iam::aws:policy/service-role/AWSCodeDeployRole"
+    Lambda = "arn:${join("", data.aws_partition.current.*.partition)}:iam::aws:policy/service-role/AWSCodeDeployRoleForLambda"
+    ECS    = "arn:${join("", data.aws_partition.current.*.partition)}:iam::aws:policy/AWSCodeDeployRoleForECS"
   }
 }
 
@@ -35,6 +35,10 @@ data "aws_iam_policy_document" "assume_role" {
   }
 }
 
+data "aws_partition" "current" {
+  count = local.default_service_role_count
+}
+
 resource "aws_iam_role" "default" {
   count              = local.default_service_role_count
   name               = module.this.id
@@ -44,7 +48,7 @@ resource "aws_iam_role" "default" {
 
 resource "aws_iam_role_policy_attachment" "default" {
   count      = local.default_service_role_count
-  policy_arn = format("arn:aws:iam::aws:policy/%s", lookup(local.default_policy_name, var.compute_platform))
+  policy_arn = format("%s", lookup(local.default_policy_arn, var.compute_platform))
   role       = join("", aws_iam_role.default.*.name)
 }
 
@@ -171,14 +175,30 @@ resource "aws_codedeploy_deployment_group" "default" {
     }
   }
 
+  # Note that you cannot have both ec_tag_filter and ec2_tag_set vars set!
+  # See https://docs.aws.amazon.com/cli/latest/reference/deploy/create-deployment-group.html for details
+  dynamic "ec2_tag_filter" {
+    for_each = length(var.ec2_tag_filter) > 0 ? [] : var.ec2_tag_filter
+    content {
+      key   = ec2_tag_filter.value["key"]
+      type  = ec2_tag_filter.value["type"]
+      value = ec2_tag_filter.value["value"]
+    }
+  }
+
+  # Note that you cannot have both ec_tag_filter and ec2_tag_set vars set!
+  # See https://docs.aws.amazon.com/cli/latest/reference/deploy/create-deployment-group.html for details
   dynamic "ec2_tag_set" {
-    for_each = var.ec2_tag_filter == null ? [] : var.ec2_tag_filter
+    for_each = length(var.ec2_tag_set) > 0 ? [] : var.ec2_tag_set
 
     content {
-      ec2_tag_filter {
-        key   = lookup(ec2_tag_set.value, "key", null)
-        type  = lookup(ec2_tag_set.value, "type", null)
-        value = lookup(ec2_tag_set.value, "value", null)
+      dynamic "ec2_tag_filter" {
+        for_each = ec2_tag_set.value.ec2_tag_filter
+        content {
+          key   = ec2_tag_filter.value["key"]
+          type  = ec2_tag_filter.value["type"]
+          value = ec2_tag_filter.value["value"]
+        }
       }
     }
   }
