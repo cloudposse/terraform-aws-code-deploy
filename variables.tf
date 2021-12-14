@@ -118,14 +118,33 @@ variable "deployment_style" {
 }
 
 variable "ec2_tag_filter" {
-  type = list(object({
+  type = set(object({
     key   = string
     type  = string
     value = string
   }))
-  default     = null
+  default     = []
   description = <<-DOC
-    A list of sets of tag filters. If multiple tag groups are specified, 
+    The Amazon EC2 tags on which to filter. The deployment group includes EC2 instances with any of the specified tags.
+    Cannot be used in the same call as ec2TagSet.
+  DOC
+}
+
+variable "ec2_tag_set" {
+  type = set(object(
+    {
+      ec2_tag_filter = set(object(
+        {
+          key   = string
+          type  = string
+          value = string
+        }
+      ))
+    }
+  ))
+  default     = []
+  description = <<-DOC
+    A list of sets of tag filters. If multiple tag groups are specified,
     any instance that matches to at least one tag filter of every tag group is selected.
 
     key:

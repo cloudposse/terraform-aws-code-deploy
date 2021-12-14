@@ -150,7 +150,7 @@ Available targets:
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_aws_codedeploy_deployment_config_label"></a> [aws\_codedeploy\_deployment\_config\_label](#module\_aws\_codedeploy\_deployment\_config\_label) | cloudposse/label/null | 0.25.0 |
-| <a name="module_sns_topic"></a> [sns\_topic](#module\_sns\_topic) | cloudposse/sns-topic/aws | 0.16.0 |
+| <a name="module_sns_topic"></a> [sns\_topic](#module\_sns\_topic) | cloudposse/sns-topic/aws | 0.20.1 |
 | <a name="module_this"></a> [this](#module\_this) | cloudposse/label/null | 0.25.0 |
 
 ## Resources
@@ -164,6 +164,7 @@ Available targets:
 | [aws_iam_role_policy_attachment.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [random_id.deployment_config_suffix](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id) | resource |
 | [aws_iam_policy_document.assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_partition.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/partition) | data source |
 
 ## Inputs
 
@@ -182,7 +183,8 @@ Available targets:
 | <a name="input_delimiter"></a> [delimiter](#input\_delimiter) | Delimiter to be used between ID elements.<br>Defaults to `-` (hyphen). Set to `""` to use no delimiter at all. | `string` | `null` | no |
 | <a name="input_deployment_style"></a> [deployment\_style](#input\_deployment\_style) | Configuration of the type of deployment, either in-place or blue/green, <br>you want to run and whether to route deployment traffic behind a load balancer.<br><br>deployment\_option:<br>  Indicates whether to route deployment traffic behind a load balancer. <br>  Possible values: `WITH_TRAFFIC_CONTROL`, `WITHOUT_TRAFFIC_CONTROL`.<br>deployment\_type:<br>  Indicates whether to run an in-place deployment or a blue/green deployment.<br>  Possible values: `IN_PLACE`, `BLUE_GREEN`. | <pre>object({<br>    deployment_option = string<br>    deployment_type   = string<br>  })</pre> | `null` | no |
 | <a name="input_descriptor_formats"></a> [descriptor\_formats](#input\_descriptor\_formats) | Describe additional descriptors to be output in the `descriptors` output map.<br>Map of maps. Keys are names of descriptors. Values are maps of the form<br>`{<br>   format = string<br>   labels = list(string)<br>}`<br>(Type is `any` so the map values can later be enhanced to provide additional options.)<br>`format` is a Terraform format string to be passed to the `format()` function.<br>`labels` is a list of labels, in order, to pass to `format()` function.<br>Label values will be normalized before being passed to `format()` so they will be<br>identical to how they appear in `id`.<br>Default is `{}` (`descriptors` output will be empty). | `any` | `{}` | no |
-| <a name="input_ec2_tag_filter"></a> [ec2\_tag\_filter](#input\_ec2\_tag\_filter) | A list of sets of tag filters. If multiple tag groups are specified, <br>any instance that matches to at least one tag filter of every tag group is selected.<br><br>key:<br>  The key of the tag filter.<br>type:<br>  The type of the tag filter, either `KEY_ONLY`, `VALUE_ONLY`, or `KEY_AND_VALUE`.<br>value:<br>  The value of the tag filter. | <pre>list(object({<br>    key   = string<br>    type  = string<br>    value = string<br>  }))</pre> | `null` | no |
+| <a name="input_ec2_tag_filter"></a> [ec2\_tag\_filter](#input\_ec2\_tag\_filter) | The Amazon EC2 tags on which to filter. The deployment group includes EC2 instances with any of the specified tags.<br>Cannot be used in the same call as ec2TagSet. | <pre>set(object({<br>    key   = string<br>    type  = string<br>    value = string<br>  }))</pre> | `[]` | no |
+| <a name="input_ec2_tag_set"></a> [ec2\_tag\_set](#input\_ec2\_tag\_set) | A list of sets of tag filters. If multiple tag groups are specified,<br>any instance that matches to at least one tag filter of every tag group is selected.<br><br>key:<br>  The key of the tag filter.<br>type:<br>  The type of the tag filter, either `KEY_ONLY`, `VALUE_ONLY`, or `KEY_AND_VALUE`.<br>value:<br>  The value of the tag filter. | <pre>set(object(<br>    {<br>      ec2_tag_filter = set(object(<br>        {<br>          key   = string<br>          type  = string<br>          value = string<br>        }<br>      ))<br>    }<br>  ))</pre> | `[]` | no |
 | <a name="input_ecs_service"></a> [ecs\_service](#input\_ecs\_service) | Configuration block(s) of the ECS services for a deployment group.<br><br>cluster\_name:<br>  The name of the ECS cluster. <br>service\_name:<br>  The name of the ECS service. | <pre>list(object({<br>    cluster_name = string<br>    service_name = string<br>  }))</pre> | `null` | no |
 | <a name="input_enabled"></a> [enabled](#input\_enabled) | Set to false to prevent the module from creating any resources | `bool` | `null` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | ID element. Usually used for region e.g. 'uw2', 'us-west-2', OR role 'prod', 'staging', 'dev', 'UAT' | `string` | `null` | no |
