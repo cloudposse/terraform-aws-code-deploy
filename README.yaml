@@ -54,7 +54,7 @@ related:
     Codefresh Enterprise
   url: https://github.com/cloudposse/terraform-aws-codefresh-backing-services
 - name: terraform-aws-code-deploy
-  description:
+  description: Terraform module to provision AWS Code Deploy app and group
   url: https://github.com/cloudposse/terraform-aws-code-deploy
 references:
 - name: terraform-provider-aws
