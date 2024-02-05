@@ -25,7 +25,7 @@
 
 -->
 
-Terraform module to provision AWS Code Deploy app and group. 
+Terraform module to provision AWS Code Deploy app and group.
 
 
 ---
@@ -61,7 +61,7 @@ For automated tests of the complete example using [bats](https://github.com/bats
 (which tests and deploys the example on AWS), see [test](test).
 
 ```hcl
-module "example" {  
+module "example" {
   source = "cloudposse/code-deploy/aws"
   # Cloud Posse recommends pinning every module to a specific version
   # version = "x.x.x"
