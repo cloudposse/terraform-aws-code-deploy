@@ -39,33 +39,29 @@ related:
   description: Terraform Module to Provide an Amazon Simple Notification Service (SNS)
   url: https://github.com/cloudposse/terraform-aws-sns-topic
 - name: terraform-null-label
-  description: Terraform Module to define a consistent naming convention by (namespace,
-    stage, name, [attributes])
+  description: Terraform Module to define a consistent naming convention by (namespace, stage, name, [attributes])
   url: https://github.com/cloudposse/terraform-null-label
 - name: terraform-aws-codebuild
   description: Terraform Module to easily leverage AWS CodeBuild for Continuous Integration
   url: https://github.com/cloudposse/terraform-aws-codebuild
 - name: terraform-aws-codepipeline-codedeploy
-  description: Terraform module that generates an AWS Codepipeline, and deploys via
-    CodeDeploy
+  description: Terraform module that generates an AWS Codepipeline, and deploys via CodeDeploy
   url: https://github.com/cloudposse/terraform-aws-codepipeline-codedeploy
 - name: terraform-aws-codefresh-backing-services
-  description: Terraform module to provision AWS backing services necessary to run
-    Codefresh Enterprise
+  description: Terraform module to provision AWS backing services necessary to run Codefresh Enterprise
   url: https://github.com/cloudposse/terraform-aws-codefresh-backing-services
 - name: terraform-aws-code-deploy
-  description:
+  description: Terraform module to provision AWS Code Deploy app and group.
   url: https://github.com/cloudposse/terraform-aws-code-deploy
 references:
 - name: terraform-provider-aws
   description: Terraform AWS provider
   url: https://registry.terraform.io/providers/hashicorp/aws/latest
 - name: terraform-provider-local
-  description: Terraform local provider – Used to manage local resources, such as
-    creating files.
+  description: Terraform local provider – Used to manage local resources, such as creating files.
   url: https://registry.terraform.io/providers/hashicorp/local/latest
 description: |-
-  Terraform module to provision AWS Code Deploy app and group. 
+  Terraform module to provision AWS Code Deploy app and group.
 
 # Introduction to the project
 #introduction: |-
@@ -79,7 +75,7 @@ usage: |-
   (which tests and deploys the example on AWS), see [test](test).
 
   ```hcl
-  module "example" {  
+  module "example" {
     source = "cloudposse/code-deploy/aws"
     # Cloud Posse recommends pinning every module to a specific version
     # version = "x.x.x"
