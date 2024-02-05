@@ -185,7 +185,7 @@ Check out these related projects.
 - [terraform-aws-codebuild](https://github.com/cloudposse/terraform-aws-codebuild) - Terraform Module to easily leverage AWS CodeBuild for Continuous Integration
 - [terraform-aws-codepipeline-codedeploy](https://github.com/cloudposse/terraform-aws-codepipeline-codedeploy) - Terraform module that generates an AWS Codepipeline, and deploys via CodeDeploy
 - [terraform-aws-codefresh-backing-services](https://github.com/cloudposse/terraform-aws-codefresh-backing-services) - Terraform module to provision AWS backing services necessary to run Codefresh Enterprise
-- [terraform-aws-code-deploy](https://github.com/cloudposse/terraform-aws-code-deploy) - %!s(<nil>)
+- [terraform-aws-code-deploy](https://github.com/cloudposse/terraform-aws-code-deploy) - Terraform module to provision AWS Code Deploy app and group.
 
 
 ## References
