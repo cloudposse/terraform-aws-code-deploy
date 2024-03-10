@@ -14,52 +14,52 @@ license: APACHE2
 
 # Copyrights
 copyrights:
-- name: Cloud Posse, LLC
-  url: https://cloudposse.com
-  year: '2020'
+  - name: Cloud Posse, LLC
+    url: https://cloudposse.com
+    year: '2020'
 
 # Canonical GitHub repo
 github_repo: cloudposse/terraform-aws-code-deploy
 
 # Badges to display
 badges:
-- name: Latest Release
-  image: https://img.shields.io/github/release/cloudposse/terraform-aws-code-deploy.svg
-  url: https://github.com/cloudposse/terraform-aws-code-deploy/releases/latest
-- name: Slack Community
-  image: https://slack.cloudposse.com/badge.svg
-  url: https://slack.cloudposse.com
-- name: Discourse Forum
-  image: https://img.shields.io/discourse/https/ask.sweetops.com/posts.svg
-  url: https://ask.sweetops.com/
+  - name: Latest Release
+    image: https://img.shields.io/github/release/cloudposse/terraform-aws-code-deploy.svg?style=for-the-badge
+    url: https://github.com/cloudposse/terraform-aws-code-deploy/releases/latest
+  - name: Last Updated
+    image: https://img.shields.io/github/last-commit/cloudposse/terraform-aws-code-deploy.svg?style=for-the-badge
+    url: https://github.com/cloudposse/terraform-aws-code-deploy/commits
+  - name: Slack Community
+    image: https://slack.cloudposse.com/for-the-badge.svg
+    url: https://slack.cloudposse.com
 
 # List any related terraform modules that this module may be used with or that this module depends on.
 related:
-- name: terraform-aws-sns-topic
-  description: Terraform Module to Provide an Amazon Simple Notification Service (SNS)
-  url: https://github.com/cloudposse/terraform-aws-sns-topic
-- name: terraform-null-label
-  description: Terraform Module to define a consistent naming convention by (namespace, stage, name, [attributes])
-  url: https://github.com/cloudposse/terraform-null-label
-- name: terraform-aws-codebuild
-  description: Terraform Module to easily leverage AWS CodeBuild for Continuous Integration
-  url: https://github.com/cloudposse/terraform-aws-codebuild
-- name: terraform-aws-codepipeline-codedeploy
-  description: Terraform module that generates an AWS Codepipeline, and deploys via CodeDeploy
-  url: https://github.com/cloudposse/terraform-aws-codepipeline-codedeploy
-- name: terraform-aws-codefresh-backing-services
-  description: Terraform module to provision AWS backing services necessary to run Codefresh Enterprise
-  url: https://github.com/cloudposse/terraform-aws-codefresh-backing-services
-- name: terraform-aws-code-deploy
-  description: Terraform module to provision AWS Code Deploy app and group.
-  url: https://github.com/cloudposse/terraform-aws-code-deploy
+  - name: terraform-aws-sns-topic
+    description: Terraform Module to Provide an Amazon Simple Notification Service (SNS)
+    url: https://github.com/cloudposse/terraform-aws-sns-topic
+  - name: terraform-null-label
+    description: Terraform Module to define a consistent naming convention by (namespace, stage, name, [attributes])
+    url: https://github.com/cloudposse/terraform-null-label
+  - name: terraform-aws-codebuild
+    description: Terraform Module to easily leverage AWS CodeBuild for Continuous Integration
+    url: https://github.com/cloudposse/terraform-aws-codebuild
+  - name: terraform-aws-codepipeline-codedeploy
+    description: Terraform module that generates an AWS Codepipeline, and deploys via CodeDeploy
+    url: https://github.com/cloudposse/terraform-aws-codepipeline-codedeploy
+  - name: terraform-aws-codefresh-backing-services
+    description: Terraform module to provision AWS backing services necessary to run Codefresh Enterprise
+    url: https://github.com/cloudposse/terraform-aws-codefresh-backing-services
+  - name: terraform-aws-code-deploy
+    description: Terraform module to provision AWS Code Deploy app and group.
+    url: https://github.com/cloudposse/terraform-aws-code-deploy
 references:
-- name: terraform-provider-aws
-  description: Terraform AWS provider
-  url: https://registry.terraform.io/providers/hashicorp/aws/latest
-- name: terraform-provider-local
-  description: Terraform local provider – Used to manage local resources, such as creating files.
-  url: https://registry.terraform.io/providers/hashicorp/local/latest
+  - name: terraform-provider-aws
+    description: Terraform AWS provider
+    url: https://registry.terraform.io/providers/hashicorp/aws/latest
+  - name: terraform-provider-local
+    description: Terraform local provider – Used to manage local resources, such as creating files.
+    url: https://registry.terraform.io/providers/hashicorp/local/latest
 description: |-
   Terraform module to provision AWS Code Deploy app and group.
 
@@ -93,12 +93,8 @@ examples: |-
 
 # Other files to include in this README from the project folder
 include:
-- docs/targets.md
-- docs/terraform.md
+  - docs/targets.md
+  - docs/terraform.md
 
 # Contributors to this project
-contributors:
-- name: Vladimir Syromyatnikov
-  github: SweetOps
-- name: RB
-  github: nitrocode
+contributors: []
