@@ -1,0 +1,7 @@
+# Upstream changes from _extends are only recognized when modifications are made to this file in the default branch.
+_extends: .github
+repository:
+  name: terraform-aws-code-deploy
+  description: Terraform module to provision AWS Code Deploy app and group.
+  homepage: https://cloudposse.com/accelerate
+  topics: terraform-modules, code-deploy, terraform, aws, ecs, ecs-task
