@@ -1,3 +1,9 @@
+variable "name" {
+  type        = string
+  default     = null
+  description = "The name for created resources"
+}
+
 variable "compute_platform" {
   type        = string
   default     = "ECS"
