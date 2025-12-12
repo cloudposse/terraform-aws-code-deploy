@@ -232,6 +232,10 @@ resource "aws_codedeploy_deployment_group" "default" {
             [load_balancer_info.value.target_group_info]
           )
         )
+
+        content {
+          name = target_group_info.value.name
+        }
       }
 
       dynamic "target_group_pair_info" {
