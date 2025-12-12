@@ -226,11 +226,12 @@ resource "aws_codedeploy_deployment_group" "default" {
       }
 
       dynamic "target_group_info" {
-        for_each = lookup(load_balancer_info.value, "target_group_info", null) == null ? [] : [load_balancer_info.value.target_group_info]
-
-        content {
-          name = target_group_info.value.name
-        }
+        for_each = lookup(load_balancer_info.value, "target_group_info", null) == null ? [] : (
+          try(
+            tolist(load_balancer_info.value.target_group_info),
+            [load_balancer_info.value.target_group_info]
+          )
+        )
       }
 
       dynamic "target_group_pair_info" {
